@@ -1,4 +1,3 @@
-import sys
 from collections import namedtuple
 
 
@@ -24,8 +23,8 @@ def extract_conflict_files():
     conflict_files = list()
     while True:
         try:
-            line = raw_input()
-            print line
+            line = input()
+            print(line)
             if -1 != line.find(conflict_indicator):
                 conflict_files.append(line.split()[-1])
         except EOFError:
@@ -63,7 +62,7 @@ def show_conflicts():
     with open(conflict_file, "w") as fd:
         for conflict in conflicts:
             fd.write(conflict.__str__())
-    print "\033[40;32mAll conflicts save in file {}\033[0m".format(conflict_file)
+    print("\033[40;32mAll conflicts save in file {}\033[0m".format(conflict_file))
 
 
 def extract_solutions_in_file(file):
@@ -104,7 +103,7 @@ def sort_solutions(solutions):
     return sorted
 
 
-def apply_solutions(file):
+def apply_solutions(file=conflict_file):
     solutions = extract_solutions_in_file(file)
     for solution in sort_solutions(solutions):
         file, start_line, end_line, content = solution[:]
@@ -125,14 +124,3 @@ def apply_solutions(file):
         with open(file, "w") as fd:
             for line in lines:
                 fd.write(line)
-
-
-if __name__ == '__main__':
-    if len(sys.argv) == 2 and sys.argv[1] == "--apply":
-        apply_solutions(conflict_file)
-    elif len(sys.argv) == 3 and sys.argv[1] == "--apply":
-        apply_solutions(sys.argv[2])
-    elif len(sys.argv) == 1:
-        show_conflicts()
-    else:
-        print "Error: Unknow action"
