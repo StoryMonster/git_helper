@@ -2,6 +2,9 @@ import sys
 from commitSearcher import search
 from conflictSolver import show_conflicts, apply_solutions
 from statusScanner import collect_modifications
+from help import print_help
+
+VERSION = 'V1.0'
 
 
 def find(keyword):
@@ -32,8 +35,10 @@ if __name__ == '__main__':
     elif argv[1] == 'readconflict':
         assert argc == 2, "extra options are found"
         read_conflict()
-    elif argv[1] == 'add':
+    elif argv[1] == 'status':
         assert argc == 2, "extra options are found"
         add_modifications()
+    elif argv[1] == '--help':
+        print_help(VERSION)
     else:
         assert False, "unknow options"
