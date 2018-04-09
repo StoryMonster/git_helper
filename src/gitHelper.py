@@ -22,9 +22,8 @@ if __name__ == '__main__':
         assert argc == 2, "extra options are found"
         collect_modifications()
     elif argv[1] == 'statistic':
-        assert argc == 2, "extra options are found"
-        git_log_statistic()
+        git_log_statistic(argv[2:])
     elif argv[1] == '--help':
         print_help()
     else:
-        assert False, "unknow options"
+        assert False, "unknow option for '{}'".format(argv[1])
