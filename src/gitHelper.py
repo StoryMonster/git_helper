@@ -4,6 +4,7 @@ from commitSearcher import search_content_in_commit_info, search_commit_id
 from conflictSolver import show_conflicts, apply_solutions
 from statusScanner import collect_modifications
 from statistics import git_log_statistic
+from blame import git_blame
 from help import print_help
 
 
@@ -30,6 +31,9 @@ if __name__ == '__main__':
         collect_modifications()
     elif argv[1] == 'statistic':
         git_log_statistic(argv[2:])
+    elif argv[1] == "blame":
+        assert argc == 3, "need 2 parameters, but {} provided".format(argc-1)
+        git_blame(argv[2])
     elif argv[1] == '--help':
         print_help()
     else:
