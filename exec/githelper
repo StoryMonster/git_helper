@@ -1,4 +1,8 @@
 #!/bin/bash
 
 script_location=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
-python3 $script_location/../src/gitHelper.py $@ | less -r
+if [ $1 == "status" ]; then
+    python3 $script_location/../src/gitHelper.py $@
+else
+    python3 $script_location/../src/gitHelper.py $@ | less -r
+fi
